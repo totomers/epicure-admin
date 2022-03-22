@@ -8,7 +8,7 @@ import { IRestaurant } from '../interfaces/restaurant.interface';
   providedIn: 'root',
 })
 export class RestaurantService {
-  private _restaurants = new BehaviorSubject<IRestaurant[]>([]);
+  private _restaurants = new BehaviorSubject<IRestaurant[] | null>(null);
   private _restaurants$ = this._restaurants.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -28,7 +28,7 @@ export class RestaurantService {
           `${environment.apiUrl}/restaurants`
         )
       );
-      console.log('restaurants received from server:', restaurants);
+      console.log('restaurants received from server:', restaurants.restaurants);
 
       this.setRestaurants(restaurants.restaurants);
     } catch (error) {

@@ -1,0 +1,48 @@
+<!-- <p>restaurant-table works!</p> -->
+<!-- <img height="300px" width="300px" src="https://epicure-uploads.s3.eu-central-1.amazonaws.com/d9af38816609feb68bec6564b3415569.jpeg"> -->
+
+<div class="table-container" *ngIf="restaurants$|async as restaurants; else loading">
+
+    <table mat-table [dataSource]="restaurants" class="mat-elevation-z8 restaurant-table">
+        <ng-container matColumnDef="name">
+            <mat-header-cell  *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell  *matCellDef="let restaurant"> {{restaurant.name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="chef">
+            <mat-header-cell *matHeaderCellDef> Chef </mat-header-cell>
+            <mat-cell *matCellDef="let restaurant"> {{restaurant.chef.name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="isPopular">
+            <mat-header-cell *matHeaderCellDef> Is Popular? </mat-header-cell>
+            <mat-cell *matCellDef="let restaurant"> {{restaurant.isPopular}} </mat-cell>
+          </ng-container>
+ 
+          <ng-container matColumnDef="actions" >
+            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+            <mat-cell *matCellDef="let restaurant"> <button mat-icon-button (click)="openEditDialog(restaurant)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button><mat-icon>delete</mat-icon></button></mat-cell>
+          </ng-container>
+ 
+          <ng-container matColumnDef="loading" >
+           <mat-footer-cell *matFooterCellDef   >
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+           </mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="noData" >
+           <mat-footer-cell *matFooterCellDef  >
+            NO DATA
+           </mat-footer-cell>
+          </ng-container>
+
+           <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':restaurants!=null}"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':(restaurants!=null&&restaurants.length>0)}"></mat-footer-row>
+      </table>
+</div>
+<ng-template #loading>
+<div>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+</div>
+</ng-template>
+<!-- {{restaurants$|async |json}} -->

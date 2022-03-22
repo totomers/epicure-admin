@@ -11,14 +11,29 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialComponentsModule } from '../material.module';
+import { RestaurantTableComponent } from './components/restaurant/restaurant-table/restaurant-table.component';
+import { AddEditResFormComponent } from './components/restaurant/add-edit-res-form/add-edit-res-form.component';
+import { ChefTableComponent } from './components/chef/chef-table/chef-table.component';
+import { DishTableComponent } from './components/dish/dish-table/dish-table.component';
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidenavComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SidenavComponent,
+    RestaurantTableComponent,
+    AddEditResFormComponent,
+    ChefTableComponent,
+    DishTableComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MaterialComponentsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

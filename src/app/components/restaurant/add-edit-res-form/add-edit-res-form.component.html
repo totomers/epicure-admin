@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>{{restaurant._id?"Edit Restaurant":"Create Restaurant"}} <mat-icon>{{restaurant._id ?"edit":"add"}}</mat-icon></h1>
+<div mat-dialog-content>
+  <div class="center-space-col">
+    <h3>{{ restaurant.name }}</h3>
+    <img
+      [src]="restaurant.url ?serverUrl+ restaurant.url : defaultImage"
+      style="width: 90px"
+      alt="restaurant image"
+    />
+    <div class="image-file-uploader-container">
+        <!-- <button (click)="pasteClipboardText($event)" mat-stroked-button>
+          <mat-icon>content_paste</mat-icon>Paste Url
+        </button> -->
+        <!-- <button
+          *ngIf="this.fc.url?.value"
+          (click)="eraseCurrentUrl($event)"
+          mat-icon-button
+        >
+          <mat-icon>cancel</mat-icon>
+        </button> -->
+        <button mat-stroked-button (click)="fileInput.click()">
+          <mat-icon>upload_file</mat-icon> Upload Image
+        </button>
+        <input
+          #fileInput
+          style="hidden"
+          type="file"
+          (change)="convertFileToBase64EncodedFile($event)"
+          name="image"
+        />
+      </div>
+  </div>
+
+  <form [formGroup]="form" class="center-col" >
+    <mat-checkbox formControlName="isPopular">Is Popular</mat-checkbox>
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+     <input formControlName="name" type="text" matInput >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('required')
+        "
+        >Name is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('max')
+        "
+        >Name is too long</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>chef</mat-label>
+        <mat-select formControlName="chef">
+            <mat-option *ngFor="let chef of chefs|async" [value]="chef._id">{{chef.name}}</mat-option>
+            <!-- <mat-option value="accent">Accent</mat-option>
+            <mat-option value="warn">Warn</mat-option> -->
+          </mat-select>
+      <mat-error
+        *ngIf="
+          this.form.controls['chef'].invalid &&
+          this.form.controls['name'].hasError('required')
+        "
+        >Please Select A Chef</mat-error
+      >
+      
+    </mat-form-field>
+    <p class="center">
+      <button *ngIf="!restaurant._id" (click)="createRestaurant()" mat-raised-button>
+        Add <mat-icon>check</mat-icon>
+      </button>
+      <button *ngIf="restaurant._id" (click)="updateRestaurant()" mat-raised-button>
+        Update <mat-icon>check</mat-icon>
+      </button>
+    </p>
+  </form>
+</div>
