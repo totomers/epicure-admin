@@ -71,4 +71,8 @@ export class DishTableComponent implements OnInit {
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
+
+  deleteDish(_id: string) {
+    this.dishService.deleteDishServer(_id);
+  }
 }
