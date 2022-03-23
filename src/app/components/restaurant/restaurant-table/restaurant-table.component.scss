@@ -2,14 +2,15 @@
 .table-container {
   margin-top: 100px;
   width: 100%;
-  @include flex-center();
+  @include flex-center(column);
 }
 .restaurant-table {
   width: 90%;
 }
 .mat-column-name {
   padding-left: 16px;
-  font-size: 20px;
+  font-weight: bolder;
+  // font-size: 20px;
 }
 
 .mat-column-chef {
@@ -29,4 +30,8 @@
 .mat-footer-row .mat-footer-cell {
   // @include flex-center();
   width: 100%;
+}
+
+.mat-paginator {
+  width: 90%;
 }

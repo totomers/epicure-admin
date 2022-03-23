@@ -1,0 +1,39 @@
+@import "../../../../styles/mixins.scss";
+.table-container {
+  margin-top: 100px;
+  width: 100%;
+  @include flex-center(column);
+}
+.chef-table {
+  width: 90%;
+}
+.mat-column-name {
+  padding-left: 16px;
+  font-weight: bolder;
+  // font-size: 20px;
+}
+
+// .mat-column-isWeekly {
+//   width: 32px;
+//   //   border-right: 1px solid currentColor;
+//   padding-right: 24px;
+//   text-align: center;
+// }
+
+.mat-column-descr {
+  //   font-style: italic;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.mat-row {
+  width: 100%;
+}
+.mat-footer-row .mat-footer-cell {
+  // @include flex-center();
+  width: 100%;
+}
+
+.mat-paginator {
+  width: 90%;
+}

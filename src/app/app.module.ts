@@ -15,6 +15,9 @@ import { RestaurantTableComponent } from './components/restaurant/restaurant-tab
 import { AddEditResFormComponent } from './components/restaurant/add-edit-res-form/add-edit-res-form.component';
 import { ChefTableComponent } from './components/chef/chef-table/chef-table.component';
 import { DishTableComponent } from './components/dish/dish-table/dish-table.component';
+import { AddEditChefFormComponent } from './components/chef/chef-table/add-edit-chef-form/add-edit-chef-form.component';
+import { AddEditDishFormComponent } from './components/dish/add-edit-dish-form/add-edit-dish-form.component';
+import { ResDishListComponent } from './components/restaurant/res-dish-list/res-dish-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,9 @@ import { DishTableComponent } from './components/dish/dish-table/dish-table.comp
     AddEditResFormComponent,
     ChefTableComponent,
     DishTableComponent,
+    AddEditChefFormComponent,
+    AddEditDishFormComponent,
+    ResDishListComponent,
   ],
   imports: [
     BrowserModule,

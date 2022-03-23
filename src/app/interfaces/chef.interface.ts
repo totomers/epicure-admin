@@ -1,11 +1,11 @@
-import { IRestaurant } from "./restaurant.interface";
+import { IRestaurant } from './restaurant.interface';
 
 export interface IChef {
   _id: string;
   name: string;
   descr: string;
   url: string;
-  restaurants: IRestaurant[];
+  isWeekly: boolean;
   url2x?: string;
   url3x?: string;
 }

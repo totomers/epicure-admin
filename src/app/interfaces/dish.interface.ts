@@ -1,6 +1,7 @@
-import { IRestaurant } from "./restaurant.interface";
+import { IRestaurant } from './restaurant.interface';
 
 export interface IDish {
+  _id: string;
   name: string;
   ingredients: string;
   url: string;

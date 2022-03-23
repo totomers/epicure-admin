@@ -1,1 +1,56 @@
-<p>chef-table works!</p>
+<!-- <p>restaurant-table works!</p> -->
+<!-- <img height="300px" width="300px" src="https://epicure-uploads.s3.eu-central-1.amazonaws.com/d9af38816609feb68bec6564b3415569.jpeg"> -->
+
+<div class="table-container">
+    <div class="search-div">
+      <mat-form-field floatLabel="never" class="search-form-field">
+        <input matInput [(ngModel)]="searchKey"(keyup)="applyFilter()" placeholder="search" autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label label="Clear" *ngIf="searchKey " (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      </div>
+      <mat-table [dataSource]="listData" class="mat-elevation-z8 chef-table" matSort>
+          <ng-container matColumnDef="name">
+              <mat-header-cell  *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+              <mat-cell  *matCellDef="let chef"> {{chef.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="descr">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+              <mat-cell *matCellDef="let chef"> {{chef.descr}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="isWeekly">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Is Weekly </mat-header-cell>
+              <mat-cell *matCellDef="let chef"> {{chef.isWeekly}} </mat-cell>
+            </ng-container>
+   
+            <ng-container matColumnDef="actions" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+              <mat-cell *matCellDef="let chef"> <button mat-icon-button (click)="openEditDialog(chef)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button><mat-icon>delete</mat-icon></button></mat-cell>
+            </ng-container>
+   
+            <ng-container matColumnDef="loading" >
+             <mat-footer-cell *matFooterCellDef   >
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+             </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="noData" >
+             <mat-footer-cell *matFooterCellDef  >
+              NO DATA
+             </mat-footer-cell>
+            </ng-container>
+  
+             <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+              <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+              <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData.data!=null}"></mat-footer-row>
+              <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':(listData.data!=null&&listData.data.length>0)}"></mat-footer-row>
+        </mat-table>
+        <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>
+  <ng-template #loading>
+  <div>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  
+  </div>
+  </ng-template>
+  <!-- {{restaurants$|async |json}} -->

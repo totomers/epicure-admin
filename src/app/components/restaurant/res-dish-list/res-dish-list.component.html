@@ -1,0 +1,18 @@
+<!-- <mat-action-list>
+    <button mat-list-item (click)="delete()"> Save </button>
+    <button mat-list-item (click)="makeSignature()"> Undo </button>
+  </mat-action-list> -->
+<div class="container-dishes">
+
+  <mat-list *ngIf="dishes&&dishes.length>0">
+    <mat-list-item *ngFor="let dish of dishes">{{dish.name}}</mat-list-item>
+
+</mat-list>
+
+    <div class="full center"  *ngIf="!loading &&!dishes" >
+      No dishes found for {{data.restaurant?.name}}
+    </div>
+    <div class="full center" *ngIf="loading ">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>
