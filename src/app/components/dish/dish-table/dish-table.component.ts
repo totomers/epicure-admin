@@ -8,6 +8,12 @@ import { IDish } from 'src/app/interfaces/dish.interface';
 import { DishService } from 'src/app/services/dish.service';
 import { AddEditDishFormComponent } from '../add-edit-dish-form/add-edit-dish-form.component';
 
+export const DISH_TAGS: { label: string; url: string }[] = [
+  { label: 'spicy', url: '/assets/icons/spicy-icon.svg' },
+  { label: 'vegetarian', url: '/assets/icons/vegan-icon.svg' },
+  { label: 'vegan', url: '/assets/icons/vegetarian-icon.svg' },
+];
+
 @Component({
   selector: 'app-dish-table',
   templateUrl: './dish-table.component.html',
@@ -51,7 +57,7 @@ export class DishTableComponent implements OnInit {
     }
   }
 
-  openEditDialog(dish: IDish) {
+  openEditDialog(dish: IDish | null) {
     this.dialog.open(AddEditDishFormComponent, {
       data: {
         dish: dish,

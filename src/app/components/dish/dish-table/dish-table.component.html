@@ -2,6 +2,10 @@
 <!-- <img height="300px" width="300px" src="https://epicure-uploads.s3.eu-central-1.amazonaws.com/d9af38816609feb68bec6564b3415569.jpeg"> -->
 
 <div class="table-container ">
+  <div class="title-bar">
+    <span class="page-title">Dishes</span>
+    <button mat-button (click)="openEditDialog(null)">Create</button>
+      </div>
     <div class="search-div">
       <mat-form-field floatLabel="never" class="search-form-field">
         <input matInput [(ngModel)]="searchKey"(keyup)="applyFilter()" placeholder="search" autocomplete="off">

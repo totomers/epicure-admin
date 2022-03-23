@@ -72,3 +72,33 @@ body {
   height: 32px;
   width: 32px;
 }
+
+.image-editor-container {
+  position: relative;
+  width: 100%;
+  @include flex-center(column);
+
+  & .image {
+    width: 97%;
+    min-height: 100px;
+    height: auto;
+  }
+}
+
+.image-file-uploader-container {
+  position: absolute;
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  align-items: center;
+  top: 0;
+}
+
+.image-file-uploader-container mat-form-field.mat-form-field {
+  background-color: aquamarine;
+  width: 100px;
+  text-align: center;
+}

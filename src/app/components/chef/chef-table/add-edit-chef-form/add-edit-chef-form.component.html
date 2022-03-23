@@ -1,1 +1,70 @@
-<p>add-edit-chef-form works!</p>
+<div class="form-container">
+    <h1 mat-dialog-title class="center">{{chef?._id?"Edit " + chef?.name :"Create "}}  <mat-icon>{{chef?._id ?"edit":"add"}}</mat-icon></h1>
+<div mat-dialog-content>
+  <div class="center-space-col">
+ <div class="image-editor-container">
+    <img
+    [src]="currentImageUrl"
+    class="image"
+    alt="chef image"
+  />
+  
+  <div class="image-file-uploader-container">
+      <button mat-flat-button   (click)="fileInput.click()" >
+        <mat-icon>upload_file</mat-icon> Upload Image
+      </button>
+      <input
+        #fileInput
+        type="file"
+        (change)="uploadFile($event)"
+        name="image"
+      />
+    </div>
+</div>
+ </div>
+
+  <form [formGroup]="form" class="center-col" >
+   
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+     <input formControlName="name" type="text" matInput >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('required')
+        "
+        >Name is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('max')
+        "
+        >Name is too long</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 1000 characters"  appearance="outline">
+        <mat-label>Descr</mat-label>
+        <textarea matInput  #input maxlength="1000"  class="text-area-form" formControlName="descr"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/1000</mat-hint>
+      <mat-error
+        *ngIf="
+          this.form.controls['descr'].invalid &&
+          this.form.controls['descr'].hasError('max')
+        "
+        > Max Characters Reached! </mat-error
+      >
+      
+    </mat-form-field>
+    
+    <p class="center">
+      <button *ngIf="!chef?._id" (click)="createChef()" mat-raised-button>
+        Add <mat-icon>check</mat-icon>
+      </button>
+      <button *ngIf="chef?._id" (click)="updateChef()" mat-raised-button>
+        Update <mat-icon>check</mat-icon>
+      </button>
+    </p>
+  </form>
+</div>
+</div>

@@ -1,8 +1,38 @@
 @import "../../../../styles/mixins.scss";
-.table-container {
+.page-container {
   margin-top: 100px;
   width: 100%;
   @include flex-center(column);
+}
+
+.weekly-chef-title {
+  font-size: 30px;
+}
+
+.weekly-chef-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 90%;
+}
+.weekly-chef-card {
+  min-height: 7vh;
+}
+.avatar-container {
+  width: 100%;
+  @include flex-center();
+  .avatar {
+    border-radius: 50%;
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+    object-position: center;
+  }
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.weekly-chef-select {
+  width: 100%;
 }
 .chef-table {
   width: 90%;
@@ -11,6 +41,9 @@
   padding-left: 16px;
   font-weight: bolder;
   // font-size: 20px;
+}
+.title-bar {
+  margin-bottom: 30px;
 }
 
 // .mat-column-isWeekly {

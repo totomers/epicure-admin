@@ -70,52 +70,45 @@ export class AddEditResFormComponent implements OnInit {
     const restaurantId = this.data.restaurant?._id!;
     const updates = this.form.getRawValue();
     this.restaurantService.updateRestaurantServer(restaurantId, updates);
+    this.dialogRef.close('Updated Restaurant Succesfully');
   }
   createRestaurant() {
     const restaurant = this.form.getRawValue();
     this.restaurantService.createRestaurantServer(restaurant);
+    this.dialogRef.close('Created Restaurant Succesfully');
   }
-  showUrl() {
-    console.log('currentImageUrl', this.currentImageUrl);
-  }
-  convertFileToBase64EncodedFile(e: any) {
+
+  async uploadFile(e: any) {
     e.preventDefault();
     const file = e.target.files[0];
     try {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = async () => {
-        const fileUrl = reader.result as string;
-
-        const imageUrl = await this.uploadService.uploadImage(file);
-        console.log('imageUrl from server', imageUrl);
-        //@ts-ignore
-        this.currentImageUrl = imageUrl;
-        this.fc['url'].setValue(imageUrl); //this url is a base64encoded file
-      };
+      const imageUrl = await this.uploadService.uploadImage(file);
+      //@ts-ignore
+      this.currentImageUrl = imageUrl;
+      this.fc['url'].setValue(imageUrl);
     } catch (error) {
       console.log(`error`, error);
     }
   }
-  pasteClipboardText = (e: any) => {
-    e.preventDefault();
-    navigator.clipboard
-      .readText()
-      .then((text) => {
-        console.log(`text`, text);
-        this.fc['url'].setValue(text);
-      })
-      .catch((err) => {
-        // maybe user didn't grant access to read from clipboard
-        console.log('Something went wrong', err);
-      });
-  };
-  eraseCurrentUrl(e: any) {
-    e.preventDefault();
-    this.fc['url'].setValue('');
-  }
-  handleUrlError(e: any) {
-    console.log(`e`, e);
-    this.fc['url'].setValue('');
-  }
+  // pasteClipboardText = (e: any) => {
+  //   e.preventDefault();
+  //   navigator.clipboard
+  //     .readText()
+  //     .then((text) => {
+  //       console.log(`text`, text);
+  //       this.fc['url'].setValue(text);
+  //     })
+  //     .catch((err) => {
+  //       // maybe user didn't grant access to read from clipboard
+  //       console.log('Something went wrong', err);
+  //     });
+  // };
+  // eraseCurrentUrl(e: any) {
+  //   e.preventDefault();
+  //   this.fc['url'].setValue('');
+  // }
+  // handleUrlError(e: any) {
+  //   console.log(`e`, e);
+  //   this.fc['url'].setValue('');
+  // }
 }

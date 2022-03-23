@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,23 +15,38 @@ import { AddEditChefFormComponent } from './add-edit-chef-form/add-edit-chef-for
   styleUrls: ['./chef-table.component.scss'],
 })
 export class ChefTableComponent implements OnInit {
-  restaurants$: Observable<IChef[] | null>;
+  chefs: IChef[] | null;
   listData: MatTableDataSource<any>;
   searchKey = '';
+  disableSelect = new FormControl(false);
+  weeklyChef$: Observable<IChef | null>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private chefService: ChefService, public dialog: MatDialog) {}
-  columnsToDisplay = ['name', 'isWeekly', 'descr', 'actions'];
+  columnsToDisplay = ['name', 'descr', 'actions'];
   ngOnInit(): void {
     this.chefService.getChefsFromServer();
+    this.chefService.getWeeklyChefServer();
     this.chefService.getChefs().subscribe((chefs) => {
+      this.chefs = chefs;
       this.listData = new MatTableDataSource(chefs!);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
     });
+    this.weeklyChef$ = this.chefService.getWeeklyChef();
   }
 
-  openEditDialog(chef: IChef) {
+  updateWeeklyChef($event?: any) {
+    console.log($event.value);
+    const chefId = $event.value;
+    this.chefService.updateWeeklyChefServer(chefId);
+  }
+
+  deleteChef(_id: string) {
+    this.chefService.deleteChefServer(_id);
+  }
+
+  openEditDialog(chef: IChef | null) {
     this.dialog.open(AddEditChefFormComponent, {
       data: {
         chef: chef,

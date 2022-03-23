@@ -17,6 +17,10 @@ export class RestaurantService {
     return this._restaurants$;
   }
 
+  isEmpty() {
+    return this._restaurants.getValue() === null;
+  }
+
   _getRestaurantsRawValue() {
     return this._restaurants.getValue();
   }
@@ -84,6 +88,20 @@ export class RestaurantService {
     }
   }
 
+  async deleteRestaurantServer(_id: string) {
+    try {
+      const { deleted } = await firstValueFrom(
+        this.http.delete<{ deleted: boolean }>(
+          `${environment.apiUrl}/restaurants/${_id}`
+        )
+      );
+      console.log('restaurant deleted from server:', deleted);
+      if (deleted) this._deleteRestaurantLocally(_id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   _updateRestaurantLocally(updatedRestaurant: IRestaurant) {
     const currentRestaurants = this._getRestaurantsRawValue()!;
     const curIndex = currentRestaurants?.findIndex(
@@ -95,6 +113,13 @@ export class RestaurantService {
   _createRestaurantLocally(createRestaurant: IRestaurant) {
     const currentRestaurants = this._getRestaurantsRawValue()!;
     currentRestaurants.push(createRestaurant);
+    this.setRestaurants(currentRestaurants);
+  }
+
+  _deleteRestaurantLocally(_id: string) {
+    const currentRestaurants = this._getRestaurantsRawValue()!;
+    const curIndex = currentRestaurants?.findIndex((r) => r._id === _id);
+    currentRestaurants.splice(curIndex, 1);
     this.setRestaurants(currentRestaurants);
   }
 }

@@ -1,1 +1,111 @@
-<p>add-edit-dish-form works!</p>
+<div class="form-container">
+    <h1 mat-dialog-title class="center">{{dish?._id?"Edit " + dish?.name :"Create "}}  <mat-icon>{{dish?._id ?"edit":"add"}}</mat-icon></h1>
+<div mat-dialog-content>
+  <div class="center-space-col">
+ <div class="image-editor-container">
+    <img
+    [src]="currentImageUrl"
+    class="image"
+    alt="Dish image"
+  />
+  
+  <div class="image-file-uploader-container">
+      <button mat-flat-button   (click)="fileInput.click()" >
+        <mat-icon>upload_file</mat-icon> Upload Image
+      </button>
+      <input
+        #fileInput
+        type="file"
+        (change)="uploadFile($event)"
+        name="image"
+      />
+    </div>
+</div>
+ </div>
+
+  <form [formGroup]="form" class="center-col" >
+   
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+     <input formControlName="name" type="text" matInput >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('required')
+        "
+        >Name is required</mat-error
+      >
+      <mat-error
+        *ngIf="
+          this.form.controls['name'].invalid &&
+          this.form.controls['name'].hasError('max')
+        "
+        >Name is too long</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Restaurant</mat-label>
+        <mat-select formControlName="restaurant">
+            <mat-option *ngFor="let restaurant of restaurants$|async" [value]="restaurant._id">{{restaurant.name}}</mat-option>
+
+          </mat-select>
+      <mat-error
+        *ngIf="
+          this.form.controls['restaurant'].invalid &&
+          this.form.controls['restaurant'].hasError('required')
+        "
+        >Please Select A Restaurant</mat-error
+      >
+      
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 1000 characters"  appearance="outline">
+        <mat-label>Ingredients</mat-label>
+        <textarea matInput  #input maxlength="1000"  class="text-area-form" formControlName="ingredients"></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/1000</mat-hint>
+      <mat-error
+        *ngIf="
+          this.form.controls['ingredients'].invalid &&
+          this.form.controls['ingredients'].hasError('max')
+        "
+        > Max Characters Reached! </mat-error
+      >
+      
+    </mat-form-field>
+    
+    <mat-form-field   appearance="outline">
+        <mat-label>Add Tags</mat-label>
+          <mat-select formControlName="tags" multiple>
+            <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+          </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput  #input type="number"  formControlName="price"/>
+
+      <mat-error
+        *ngIf="
+          this.form.controls['price'].invalid &&
+          this.form.controls['price'].hasError('min')
+        "
+        > Minimum value is 0! </mat-error>
+      <mat-error
+        *ngIf="
+          this.form.controls['price'].invalid &&
+          this.form.controls['price'].hasError('max')
+        "
+        > Price value is too high! </mat-error>
+      
+    </mat-form-field>
+    
+    <p class="center">
+      <button [disabled]="form.invalid" *ngIf="!dish?._id" (click)="createDish()" mat-raised-button>
+        Add <mat-icon>check</mat-icon>
+      </button>
+      <button [disabled]="form.invalid"  *ngIf="dish?._id" (click)="updateDish()" mat-raised-button>
+        Update <mat-icon>check</mat-icon>
+      </button>
+    </p>
+  </form>
+</div>
+</div>

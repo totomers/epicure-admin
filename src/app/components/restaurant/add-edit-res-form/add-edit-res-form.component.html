@@ -1,14 +1,7 @@
 <div class="form-container">
-    <h1 mat-dialog-title class="center">{{restaurant?._id?"Edit " + restaurant?.name :"Create "+ restaurant?.name}}  <mat-icon>{{restaurant?._id ?"edit":"add"}}</mat-icon></h1>
+    <h1 mat-dialog-title class="center">{{restaurant?._id?"Edit " + restaurant?.name :"Create"}}  <mat-icon>{{restaurant?._id ?"edit":"add"}}</mat-icon></h1>
 <div mat-dialog-content>
   <div class="center-space-col">
-    <!-- <div class="image-editor-container">
-        <img
-        [src]="currentImageUrl"
-        class="image"
-        alt="restaurant image"
-      /> -->
-      <button (click)="showUrl()">SHOW URL</button>
  <div class="image-editor-container">
     <img
     [src]="currentImageUrl"
@@ -32,9 +25,8 @@
       </button>
       <input
         #fileInput
-        
         type="file"
-        (change)="convertFileToBase64EncodedFile($event)"
+        (change)="uploadFile($event)"
         name="image"
       />
     </div>
@@ -65,13 +57,12 @@
         <mat-label>chef</mat-label>
         <mat-select formControlName="chef">
             <mat-option *ngFor="let chef of chefs|async" [value]="chef._id">{{chef.name}}</mat-option>
-            <!-- <mat-option value="accent">Accent</mat-option>
-            <mat-option value="warn">Warn</mat-option> -->
+
           </mat-select>
       <mat-error
         *ngIf="
           this.form.controls['chef'].invalid &&
-          this.form.controls['name'].hasError('required')
+          this.form.controls['chef'].hasError('required')
         "
         >Please Select A Chef</mat-error
       >

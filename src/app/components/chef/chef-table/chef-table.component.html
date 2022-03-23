@@ -1,7 +1,14 @@
 <!-- <p>restaurant-table works!</p> -->
 <!-- <img height="300px" width="300px" src="https://epicure-uploads.s3.eu-central-1.amazonaws.com/d9af38816609feb68bec6564b3415569.jpeg"> -->
 
-<div class="table-container">
+
+<div class="page-container">
+
+
+  <div class="title-bar">
+    <span class="page-title">Chefs</span>
+    <button mat-button (click)="openEditDialog(null)">Create</button>
+      </div>
     <div class="search-div">
       <mat-form-field floatLabel="never" class="search-form-field">
         <input matInput [(ngModel)]="searchKey"(keyup)="applyFilter()" placeholder="search" autocomplete="off">
@@ -19,14 +26,11 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
               <mat-cell *matCellDef="let chef"> {{chef.descr}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="isWeekly">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Is Weekly </mat-header-cell>
-              <mat-cell *matCellDef="let chef"> {{chef.isWeekly}} </mat-cell>
-            </ng-container>
+ 
    
             <ng-container matColumnDef="actions" >
               <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-              <mat-cell *matCellDef="let chef"> <button mat-icon-button (click)="openEditDialog(chef)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button><mat-icon>delete</mat-icon></button></mat-cell>
+              <mat-cell *matCellDef="let chef"> <button mat-icon-button (click)="openEditDialog(chef)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button (click)="deleteChef(chef._id)"><mat-icon>delete</mat-icon></button></mat-cell>
             </ng-container>
    
             <ng-container matColumnDef="loading" >
@@ -46,6 +50,25 @@
               <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':(listData.data!=null&&listData.data.length>0)}"></mat-footer-row>
         </mat-table>
         <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+        <div class="weekly-chef-container">
+
+          <div class="title-bar">
+            <span class="weekly-chef-title">Chef Of The Week</span>
+          </div>
+              <mat-card class="mat-elevation-z8 weekly-chef-card"> 
+               <div class="avatar-container">
+                <img class="avatar" [src]="(weeklyChef$|async)?.url">
+               </div>
+                <mat-form-field appearance="fill" class="weekly-chef-select">
+                  <mat-label>Weekly Chef</mat-label>
+                  <mat-select [disabled]="disableSelect.value" [value]="(weeklyChef$|async)?._id" (selectionChange)="updateWeeklyChef($event)">
+                    <mat-option  *ngFor="let chef of  chefs" [disabled]="chef.isWeekly" [value]="chef._id" >{{chef.name}}</mat-option>
+                   
+                  </mat-select>
+                </mat-form-field>
+              </mat-card>
+        </div>
   </div>
   <ng-template #loading>
   <div>
@@ -53,4 +76,6 @@
   
   </div>
   </ng-template>
+  
   <!-- {{restaurants$|async |json}} -->
+

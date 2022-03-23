@@ -62,4 +62,8 @@ export class RestaurantTableComponent implements OnInit {
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
+
+  deleteRestaurant(_id: string) {
+    this.restaurantService.deleteRestaurantServer(_id);
+  }
 }

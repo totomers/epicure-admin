@@ -44,7 +44,7 @@
  
           <ng-container matColumnDef="actions" >
             <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-            <mat-cell *matCellDef="let restaurant"> <button mat-icon-button (click)="openEditDialog(restaurant)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button><mat-icon>delete</mat-icon></button></mat-cell>
+            <mat-cell *matCellDef="let restaurant"> <button mat-icon-button (click)="openEditDialog(restaurant)"><mat-icon>edit</mat-icon></button>  <button mat-icon-button (click)="deleteRestaurant(restaurant._id)"><mat-icon>delete</mat-icon></button></mat-cell>
           </ng-container>
  
           <ng-container matColumnDef="loading" >
