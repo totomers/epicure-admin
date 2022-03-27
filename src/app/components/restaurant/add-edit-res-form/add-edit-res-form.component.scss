@@ -20,6 +20,9 @@ input[type="file"] {
   width: 100%;
   @include flex-center(column);
 }
+.mat-form-field {
+  width: 100%;
+}
 
 .image {
   width: 97%;

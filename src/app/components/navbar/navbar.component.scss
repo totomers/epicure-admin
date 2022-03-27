@@ -1,0 +1,23 @@
+.mat-list-item {
+  //   color: white;
+  font-family: HelveticaNeue-Thin, Helvetica, sans-serif;
+  letter-spacing: 1.92px;
+}
+
+.mat-icon {
+  margin-right: 10px;
+}
+
+.active-link {
+  &::after {
+    content: "";
+    top: 0;
+    bottom: 0;
+    right: 3px;
+    position: absolute;
+    width: 2px;
+    height: 90%;
+    margin: auto;
+    background-color: rgb(188, 184, 209);
+  }
+}

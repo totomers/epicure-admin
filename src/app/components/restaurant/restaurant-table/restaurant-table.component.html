@@ -1,10 +1,10 @@
 <!-- <p>restaurant-table works!</p> -->
 <!-- <img height="300px" width="300px" src="https://epicure-uploads.s3.eu-central-1.amazonaws.com/d9af38816609feb68bec6564b3415569.jpeg"> -->
 
-<div class="table-container ">
+<div class="table-container" [@slideIn]="isShown">
   <div class="title-bar">
 <span class="page-title">Restaurants</span>
-<button mat-button (click)="openEditDialog(null)">Create</button>
+
   </div>
 <div class="table-toolbar ">
 
@@ -15,6 +15,9 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+    <div class="create-button-container">
+      <button mat-fab (click)="openEditDialog(null)"><mat-icon>add</mat-icon></button>
+    </div>
     </div>
 
 </div>
@@ -29,7 +32,7 @@
           </ng-container>
           <ng-container matColumnDef="isPopular">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Is Popular? </mat-header-cell>
-            <mat-cell *matCellDef="let restaurant"> {{restaurant.isPopular}} </mat-cell>
+            <mat-cell *matCellDef="let restaurant">  <mat-icon *ngIf="restaurant.isPopular">done_outline</mat-icon> </mat-cell>
           </ng-container>
  
           <ng-container matColumnDef="signatureDish">
@@ -39,7 +42,9 @@
  
           <ng-container matColumnDef="dishes">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Dishes </mat-header-cell>
-            <mat-cell *matCellDef="let restaurant"> <button mat-raised-button color="primary" (click)="openDishesDialog(restaurant)">Dish List</button> </mat-cell>
+            <mat-cell *matCellDef="let restaurant"><div class="button-container"> <button mat-icon-button  (click)="openDishesDialog(restaurant)"><mat-icon>list</mat-icon> </button> </div> 
+           
+            </mat-cell>
           </ng-container>
  
           <ng-container matColumnDef="actions" >
@@ -63,7 +68,7 @@
             <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData.data!=null}"></mat-footer-row>
             <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':(listData.data!=null&&listData.data.length>0)}"></mat-footer-row>
       </mat-table>
-      <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+      <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5,10,15,20]" [pageSize]="10" showFirstLastButtons></mat-paginator>
 </div>
 <ng-template #loading>
 <div>

@@ -3,6 +3,7 @@
   margin-top: 100px;
   width: 100%;
   @include flex-center(column);
+  position: relative;
 }
 .dish-table {
   width: 90%;
@@ -11,6 +12,43 @@
   padding-left: 16px;
   font-weight: bolder;
   // font-size: 20px;
+}
+
+.tag-container {
+  @include flex-center();
+  flex-wrap: wrap;
+  .tag {
+    border-radius: 50%;
+
+    @include flex-center();
+    img {
+      border-radius: 50%;
+      border: 1px solid rgba(83, 82, 82, 0.164);
+      width: 30px;
+      height: 30px;
+      margin-right: 6px;
+      padding: 2px;
+    }
+  }
+}
+.mat-column-tags {
+  padding-left: 16px;
+  font-weight: bolder;
+  // font-size: 20px;
+}
+.mat-column-actions {
+  justify-content: end;
+  flex-direction: column;
+
+  @include md() {
+    flex-direction: row;
+  }
+}
+.mat-column-ingredients {
+  // justify-content: end;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 // .mat-column-restaurant {
@@ -40,10 +78,4 @@
 
 .mat-paginator {
   width: 90%;
-}
-
-.tag {
-  width: 30px;
-  height: 30px;
-  margin-right: 6px;
 }

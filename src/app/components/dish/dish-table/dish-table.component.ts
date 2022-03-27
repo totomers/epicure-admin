@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { IDish } from 'src/app/interfaces/dish.interface';
 import { DishService } from 'src/app/services/dish.service';
+import { slideInAnimation } from 'src/app/utils/animations';
 import { AddEditDishFormComponent } from '../add-edit-dish-form/add-edit-dish-form.component';
 
 export const DISH_TAGS: { label: string; url: string }[] = [
@@ -16,12 +17,14 @@ export const DISH_TAGS: { label: string; url: string }[] = [
 
 @Component({
   selector: 'app-dish-table',
+  animations: slideInAnimation,
   templateUrl: './dish-table.component.html',
   styleUrls: ['./dish-table.component.scss'],
 })
-export class DishTableComponent implements OnInit {
+export class DishTableComponent implements OnInit, AfterViewInit {
   dishes$: Observable<IDish[] | null>;
   listData: MatTableDataSource<any>;
+  isShown = false;
   searchKey = '';
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,14 +38,17 @@ export class DishTableComponent implements OnInit {
     'actions',
   ];
   ngOnInit(): void {
-    this.dishService.getAllDishesFromServer();
     this.dishService.getDishes().subscribe((dishes) => {
       this.listData = new MatTableDataSource(dishes!);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
     });
+    this.dishService.getAllDishesFromServer();
   }
 
+  ngAfterViewInit(): void {
+    this.isShown = true;
+  }
   getTagIcon(tag: 'spicy' | 'vegetarian' | 'vegan' | null) {
     switch (tag) {
       case 'spicy':

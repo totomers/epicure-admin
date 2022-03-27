@@ -6,6 +6,7 @@
 }
 .restaurant-table {
   width: 90%;
+  // position: relative;
 }
 .mat-column-name {
   padding-left: 16px;
@@ -26,6 +27,21 @@
 
 .mat-row {
   width: 100%;
+}
+.button-container {
+  padding: 2px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.mat-column-actions {
+  justify-content: end;
+  flex-direction: column;
+
+  @include md() {
+    flex-direction: row;
+  }
 }
 .mat-footer-row .mat-footer-cell {
   // @include flex-center();

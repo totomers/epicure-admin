@@ -3,9 +3,13 @@
 }
 
 .form-container {
-  width: 20vw;
+  width: max(200px, 20vw);
 }
 
 input[type="file"] {
   display: none;
+}
+
+.mat-form-field {
+  width: 100%;
 }
