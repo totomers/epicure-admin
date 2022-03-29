@@ -1,0 +1,67 @@
+@import "../../styles/mixins.scss";
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-is-mobile .main-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.mat-toolbar {
+  background-color: #1d2327;
+  //   background: rgb(34, 193, 195);
+  //   background: linear-gradient(
+  //     169deg,
+  //     rgba(34, 193, 195, 1) 0%,
+  //     rgba(228, 45, 253, 1) 100%
+  //   );
+
+  //   height: 10vh;
+}
+.spacer {
+  margin-left: auto;
+  text-align: center;
+  @include flex-center();
+}
+
+h1.title {
+  margin-left: 8px;
+  user-select: none;
+  cursor: pointer;
+  @include flex-center();
+  img {
+    background-color: aliceblue;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+}
+
+.sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+         causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+  background-color: #f2f3f7;
+}
+.mat-sidenav {
+  //   background-color: #1d2327ea;
+  //   background: rgb(34, 193, 195);
+  //   background: linear-gradient(
+  //     169deg,
+  //     rgba(34, 193, 195, 1) 0%,
+  //     rgba(228, 45, 253, 1) 100%
+  //   );
+}
+
+.example-is-mobile .sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+         `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}

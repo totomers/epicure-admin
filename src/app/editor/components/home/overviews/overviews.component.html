@@ -1,0 +1,45 @@
+<div class="card-container"  [@slideIn]="isShown">
+
+   
+  <mat-card  routerLink="/restaurants" class="overview-card card-body text-white-secondary bg-gr-blue"> 
+ 
+        <h4 class="card-title font-main mb-0">Restaurants</h4>
+        <p class="font-important-stat text-white mb-0">{{count?.restaurants}}
+          <span class="font-secondary"> 
+            <i class="fas fa-cube" aria-hidden="true"></i>
+          </span> 
+        </p>
+        <p class="text-white-secondary mb-0">Total</p>
+
+</mat-card>      
+   
+   
+  <mat-card  routerLink="/chefs" class="overview-card card-body text-white-secondary bg-gr-green"> 
+ 
+        <h4 class="card-title font-main mb-0">Chefs</h4>
+        <p class="font-important-stat text-white mb-0">{{count?.chefs}}
+          <span class="font-secondary"> 
+            <i class="fas fa-cube" aria-hidden="true"></i>
+          </span> 
+        </p>
+        <p class="text-white-secondary mb-0">Total</p>
+
+</mat-card>      
+   
+   
+  <mat-card  routerLink="/dishes" class="overview-card card-body text-white-secondary bg-gr-red"> 
+ 
+        <h4 class="card-title font-main mb-0">Dishes</h4>
+        <p class="font-important-stat text-white mb-0">{{count?.dishes}}
+          <span class="font-secondary"> 
+            <i class="fas fa-cube" aria-hidden="true"></i>
+          </span> 
+        </p>
+        <p class="text-white-secondary mb-0">Total</p>
+
+</mat-card>      
+   
+
+
+
+</div>

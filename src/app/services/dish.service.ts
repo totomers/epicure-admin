@@ -27,9 +27,10 @@ export class DishService {
   async getAllDishesFromServer() {
     try {
       const dishes = await firstValueFrom(
-        this.http.get<{ dishes: IDish[] }>(`${environment.apiUrl}/dishes`)
+        this.http.get<{ dishes: IDish[] }>(
+          `${environment.apiUrl}/dishes/getAll`
+        )
       );
-      console.log('dishes received from server:', dishes.dishes);
 
       this.setDishes(dishes.dishes);
     } catch (error) {
@@ -44,7 +45,6 @@ export class DishService {
           `${environment.apiUrl}/dishes/ofRestaurant/${_id}`
         )
       );
-      console.log('dishes received from server:', dishes.dishes);
 
       return dishes.dishes;
     } catch (error) {
@@ -71,7 +71,6 @@ export class DishService {
           update
         )
       );
-      console.log('updatedDish received from server:', updatedDish);
       this._updateDishLocally(updatedDish);
     } catch (error) {
       console.log(error);
@@ -92,7 +91,6 @@ export class DishService {
           dish
         )
       );
-      console.log('newDish received from server:', newDish);
       this._createDishLocally(newDish);
     } catch (error) {
       console.log(error);
@@ -106,7 +104,6 @@ export class DishService {
           `${environment.apiUrl}/dishes/${_id}`
         )
       );
-      console.log('Dish deleted from server:', deleted);
       if (deleted) this._deleteDishLocally(_id);
     } catch (error) {
       console.log(error);

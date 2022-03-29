@@ -33,10 +33,9 @@ export class RestaurantService {
     try {
       const restaurants = await firstValueFrom(
         this.http.get<{ restaurants: IRestaurant[] }>(
-          `${environment.apiUrl}/restaurants`
+          `${environment.apiUrl}/restaurants/getAll`
         )
       );
-      console.log('restaurants received from server:', restaurants.restaurants);
 
       this.setRestaurants(restaurants.restaurants);
     } catch (error) {
@@ -61,7 +60,6 @@ export class RestaurantService {
           update
         )
       );
-      console.log('updatedRestaurant received from server:', updatedRestaurant);
       this._updateRestaurantLocally(updatedRestaurant);
     } catch (error) {
       console.log(error);
@@ -81,7 +79,6 @@ export class RestaurantService {
           restaurant
         )
       );
-      console.log('newRestaurant received from server:', newRestaurant);
       this._createRestaurantLocally(newRestaurant);
     } catch (error) {
       console.log(error);
@@ -95,7 +92,6 @@ export class RestaurantService {
           `${environment.apiUrl}/restaurants/${_id}`
         )
       );
-      console.log('restaurant deleted from server:', deleted);
       if (deleted) this._deleteRestaurantLocally(_id);
     } catch (error) {
       console.log(error);

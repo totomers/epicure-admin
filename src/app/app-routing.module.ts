@@ -1,27 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChefTableComponent } from './components/chef/chef-table/chef-table.component';
-import { DishTableComponent } from './components/dish/dish-table/dish-table.component';
-import { OverviewsComponent } from './components/home/overviews/overviews.component';
-import { RestaurantTableComponent } from './components/restaurant/restaurant-table/restaurant-table.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  // { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
   {
     path: '',
-    component: OverviewsComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./editor/editor.module').then((m) => m.EditorModule),
   },
   {
-    path: 'restaurants',
-    component: RestaurantTableComponent,
-  },
-  {
-    path: 'chefs',
-    component: ChefTableComponent,
-  },
-  {
-    path: 'dishes',
-    component: DishTableComponent,
+    path: 'account',
+    loadChildren: () =>
+      import('./account/account.module').then((m) => m.AccountModule),
   },
 ];
 

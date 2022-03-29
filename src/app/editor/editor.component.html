@@ -1,0 +1,28 @@
+<div class="main-container"  [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="main-toolbar">
+        <button  mat-icon-button (click)="snav.toggle()"><mat-icon>{{snav.opened ? "arrow_left" : 'arrow_right'}}</mat-icon></button>
+        <h1  routerLink="/" class="title"><img src="/assets/icons/epicure-icon-small.png"> Epicure Admin</h1>
+        <div class="spacer"></div>
+               <button mat-mini-fab [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon> </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item>Settings</button>
+        </mat-menu>
+    
+      </mat-toolbar>
+    <mat-sidenav-container class="sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" opened="true" >
+        <mat-nav-list>
+            <app-navbar></app-navbar>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div [@routeAnimations]="getRouteAnimationData()">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  

@@ -1,0 +1,33 @@
+@import "../../../styles/mixins.scss";
+
+.container {
+  height: 100vh;
+  @include flex-center(column);
+}
+
+form {
+  width: max(30vw, 280px);
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.register-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: rgb(54, 54, 59);
+}
+
+.mat-stroked-button {
+  &.register-button {
+    margin-bottom: 15px;
+  }
+}
+
+.mat-raised-button {
+  &.login-button {
+    width: 80%;
+  }
+}

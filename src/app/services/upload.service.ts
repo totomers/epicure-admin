@@ -20,6 +20,7 @@ export class UploadService {
       const { url } = await firstValueFrom(
         this.http.get<{ url: string }>(`${environment.apiUrl}/s3`)
       );
+      console.log('file', base64EncodedImage);
 
       console.log('url from server', url);
 

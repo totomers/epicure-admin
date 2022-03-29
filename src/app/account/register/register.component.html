@@ -1,0 +1,103 @@
+<div class="container">
+
+ 
+    <mat-card class="login-width">
+        
+        <h1><button class="return-button" mat-icon-button routerLink="../login" ><mat-icon>arrow_back</mat-icon></button><span>Register</span>   </h1>
+          <form [formGroup]="form" >
+        
+            <mat-form-field appearance="legacy" class="w-full">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="johnsmith@gmail.com"
+                formControlName="email"
+              />
+              <button *ngIf="this.fc['email'].pending" mat-icon-button matSuffix>
+                <mat-spinner [diameter]="15"></mat-spinner>
+              </button>
+  
+              <mat-error *ngIf="this.fc['email'].invalid">{{
+                getEmailError()
+              }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="w-full">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+              </button>
+              <mat-error *ngIf="this.fc['password'].invalid">{{
+                getPasswordError()
+              }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" class="w-full">
+              <mat-label>Password Confirm</mat-label>
+              <input
+                matInput
+                formControlName="confirmedPassword"
+                [type]="hide ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+              </button>
+              <mat-error *ngIf="this.fc['confirmedPassword'].invalid">{{
+                getConfirmedPasswordError()
+              }}</mat-error>
+            </mat-form-field>
+   
+            <mat-form-field appearance="legacy" class="w-full">
+                <mat-label>First Name</mat-label>
+                <input
+                  matInput
+                  formControlName="firstName"
+                  placeholder="Ex. John"
+                  required
+                />
+                <mat-error *ngIf="this.fc['firstName'].invalid">
+                  Please enter your firstName.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="legacy" class="w-full">
+                <mat-label>Last Name</mat-label>
+                <input
+                  matInput
+                  formControlName="lastName"
+                  placeholder="Ex. Smith"
+                  required
+                />
+                <mat-error *ngIf="this.fc['lastName'].invalid">
+                  Please enter your lastName.
+                </mat-error>
+              </mat-form-field>
+              <mat-error *ngIf="errorResponse">{{
+                errorResponse | json
+              }}</mat-error>
+    
+              <div>
+                <button mat-button (click)="register()">Create</button>
+              </div>
+              <mat-progress-bar
+                *ngIf="loading"
+                mode="indeterminate"
+              ></mat-progress-bar>
+          
+          </form>
+    </mat-card>
+  </div>

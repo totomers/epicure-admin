@@ -38,7 +38,7 @@ export class ChefService {
   async getChefsFromServer() {
     try {
       const chefs = await firstValueFrom(
-        this.http.get<{ chefs: IChef[] }>(`${environment.apiUrl}/chefs`)
+        this.http.get<{ chefs: IChef[] }>(`${environment.apiUrl}/chefs/getAll`)
       );
       console.log('chefs', chefs);
 
@@ -93,7 +93,6 @@ export class ChefService {
           update
         )
       );
-      console.log('updatedChef received from server:', updatedChef);
       this._updateChefLocally(updatedChef);
     } catch (error) {
       console.log(error);
@@ -112,7 +111,6 @@ export class ChefService {
           chef
         )
       );
-      console.log('newChef received from server:', newChef);
       this._createChefLocally(newChef);
     } catch (error) {
       console.log(error);
@@ -126,7 +124,6 @@ export class ChefService {
           `${environment.apiUrl}/chefs/${_id}`
         )
       );
-      console.log('chef deleted from server:', deleted);
       if (deleted) this._deleteChefLocally(_id);
     } catch (error) {
       console.log(error);
