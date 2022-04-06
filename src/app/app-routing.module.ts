@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./editor/editor.module').then((m) => m.EditorModule),
